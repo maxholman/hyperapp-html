@@ -86,6 +86,7 @@
     "summary",
     "sup",
     "svg",
+    "symbol",
     "table",
     "tbody",
     "td",
@@ -98,6 +99,7 @@
     "track",
     "u",
     "ul",
+    "use",
     "video",
     "wbr"
   ]
