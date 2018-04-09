@@ -7,11 +7,11 @@ import { VNode } from "hyperapp"
  * @param attributes Any valid HTML atributes, events, styles, and meta data
  * @param children   The VNode children
  */
-export function {{ tag }}<Props = {}>(
-  props: Props,
-  ...children: Array<string | VNode<{}>>
-): VNode<Props>
-export function {{ tag }}(
-  ...children: Array<string | VNode<{}>>
+export function {{ name }}<Attributes = {}>(
+  attributes: Attributes,
+  ...children: Array<string | number | VNode<{}>>
+): VNode<Attributes>
+export function {{ name }}(
+  ...children: Array<string  | number| VNode<{}>>
 ): VNode<{}>
 {% endfor %}
