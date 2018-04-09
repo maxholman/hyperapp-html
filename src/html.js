@@ -1,15 +1,20 @@
 import { h } from "hyperapp"
 
-function vnode(name) {
-  return function (attributes, children) {
-    return typeof attributes === "object" && !Array.isArray(attributes)
-      ? h(name, attributes, children)
-      : h(name, {}, attributes)
-  }
+function isVnode(obj) {
+  return typeof obj === 'object' &&
+    'nodeName' in obj &&
+    'attributes' in obj &&
+    'key' in obj &&
+    'children' in obj && (!obj.children || Array.isArray(obj.children));
 }
 
-{% for name in htmlTags %}
-export function {{ name }}(attributes, children) {
-  return vnode("{{ name }}")(attributes, children)
+export function smartVnode(tag, args = []) {
+  const [propsOrChild, ...children] = args;
+  return typeof propsOrChild === 'object' && !isVnode(propsOrChild) && !Array.isArray(propsOrChild)
+    ? h(tag, propsOrChild, children)
+    : h(tag, {}, ([propsOrChild]).concat(children));
 }
+
+{% for tag in htmlTags %}
+export function {{ tag }}() { return smartVnode('{{ tag }}', arguments); }
 {% endfor %}
